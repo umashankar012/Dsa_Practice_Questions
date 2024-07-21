@@ -16,7 +16,36 @@ Input: nums = [2,2,1,1,1,2,2]
 Output: 2
 
 
+Solution :: 
+    First Solution-> 
+        *Create a first loop and for the first element make count as 1
+        *Create a another loop inside when i and j indices are pointing the same element then continue
+        *if they are not then increment the count
+        *return the count
 
+        Time COmplexity: O(n^2)
+        Space Complexity: O(1)
+
+    Second Solution->
+        *Create a hashmap to store the frequencies of the elements
+        *Traverse a hashmap and check which value is greater than n/2 of the array
+        *if found then simply return the key
+        *else return -1;
+
+        Time Complexity: O(N)
+        Space Complexity: O(N)
+
+    Third Solution ->
+        Apply Moore Voting Algorithm :: 
+        *Create a variable element and count where element stores the value and count stores the number of occurences
+        *Traverse a for loop in the array
+        *if count is 0 then set the el with arr[i] and increment the count
+        *if el is same as the arr[i] then increment the count
+        *else it will be diffrent then simply decrement the count 
+        *after reaching to the end of array we can return element variable where element stores the majority element
+
+        Time Complexity: O(n)
+        Space Complexity: O(1)
 */
 
 class Solution {
@@ -64,5 +93,26 @@ class Solution {
         }
       }
       return -1;
+    }
+}
+
+class Solution {
+    public int majorityElement(int[] nums) {
+        int el = 0;
+        int count = 0;
+
+        for(int i=0; i<nums.length; i++) {
+            if(count == 0) { //if the first element encounter
+                el = nums[i];
+                count = 1;
+            }
+            else if(el == nums[i]){ //element and the value are same
+                count++;
+            }
+            else {
+                count--; //not same decrement count
+            }
+        }
+        return el;
     }
 }
